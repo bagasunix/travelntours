@@ -32,5 +32,8 @@
   "bugs": {
     "url": "https://github.com/bagasunix/travelntours/issues"
   },
-  "homepage": "https://github.com/bagasunix/travelntours#readme"
+  "homepage": "https://github.com/bagasunix/travelntours#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
 }
