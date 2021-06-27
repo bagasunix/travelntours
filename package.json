@@ -1,0 +1,32 @@
+{
+  "name": "travelntours",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "express": "~4.16.1",
+    "morgan": "~1.9.1"
+  },
+  "description": "API Travel n Tours",
+  "main": "app.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bagasunix/travelntours.git"
+  },
+  "keywords": [
+    "API",
+    "Travel",
+    "n",
+    "Tours"
+  ],
+  "author": "BagasUnix",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bagasunix/travelntours/issues"
+  },
+  "homepage": "https://github.com/bagasunix/travelntours#readme"
+}
