@@ -94,5 +94,26 @@ module.exports = {
       });
     }
   },
-  delete: async (req, res, next) => {},
+  delete: async (req, res, next) => {
+    try {
+      const tours = await Tour.findByIdAndDelete(req.params.id);
+
+      if (!tours) {
+        res.status(404).json({
+          status: 'Error',
+          message: 'No tour found with that ID',
+        });
+      }
+
+      res.status(204).json({
+        status: 'success',
+        data: null,
+      });
+    } catch (err) {
+      res.status(500).json({
+        status: err.status,
+        message: err.message,
+      });
+    }
+  },
 };
