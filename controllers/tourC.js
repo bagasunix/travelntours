@@ -16,7 +16,7 @@ module.exports = {
         data: { tours },
       });
     } catch (err) {
-      res.status(err.status).json({
+      res.status(500).json({
         status: err.status,
         message: err.message,
       });
@@ -31,7 +31,7 @@ module.exports = {
         data: { tours },
       });
     } catch (err) {
-      res.status(err.status).json({
+      res.status(500).json({
         status: err.status,
         message: err.message,
       });
@@ -63,12 +63,36 @@ module.exports = {
         data: newTour,
       });
     } catch (err) {
-      res.status(err.status).json({
+      res.status(500).json({
         status: err.status,
         message: err.message,
       });
     }
   },
-  update: async (req, res, next) => {},
+  update: async (req, res, next) => {
+    try {
+      const tours = await Tour.findByIdAndUpdate(req.params.id, req.body, {
+        new: true,
+        runValidators: true,
+      });
+
+      if (!tours) {
+        res.status(404).json({
+          status: 'Error',
+          message: 'No tour found with that ID',
+        });
+      }
+      res.status(200).json({
+        status: 'success',
+        results: tours.length,
+        data: { tours },
+      });
+    } catch (err) {
+      res.status(500).json({
+        status: err.status,
+        message: err.message,
+      });
+    }
+  },
   delete: async (req, res, next) => {},
 };
