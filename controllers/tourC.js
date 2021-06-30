@@ -22,7 +22,38 @@ module.exports = {
       });
     }
   },
-  create: async (req, res, next) => {},
+  create: async (req, res, next) => {
+    try {
+      const { name, rating, price } = req.body;
+
+      const valid = {
+        name: 'string|empty:false',
+        rating: 'number',
+        price: 'number|empty:false',
+      };
+
+      const valids = v.validate(req.body, valid);
+
+      if (valid.length) {
+        return res.status(400).json({
+          status: 'error',
+          message: valid,
+        });
+      }
+
+      const newTour = await Tour.create({ name, rating, price });
+
+      res.status(200).json({
+        status: 'success',
+        data: newTour,
+      });
+    } catch (err) {
+      return res.status(err.status).json({
+        status: err.status,
+        message: err.message,
+      });
+    }
+  },
   update: async (req, res, next) => {},
   delete: async (req, res, next) => {},
 };
