@@ -1,14 +1,14 @@
-require('dotenv').config()
+require('dotenv').config();
 const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
-const rateLimit = require("express-rate-limit");
-const helmet = require("helmet");
-const mongoSanitize = require("express-mongo-sanitize");
-const xss = require("xss-clean");
-const hpp = require("hpp");
-const mongoose = require('mongoose')
+const rateLimit = require('express-rate-limit');
+const helmet = require('helmet');
+const mongoSanitize = require('express-mongo-sanitize');
+const xss = require('xss-clean');
+const hpp = require('hpp');
+const mongoose = require('mongoose');
 
 mongoose
   .connect(process.env.DB, {
@@ -17,8 +17,7 @@ mongoose
     useCreateIndex: true,
     useFindAndModify: false,
   })
-  .then(() => console.log("Database Connection Successful!"));
-
+  .then(() => console.log('Database Connection Successful!'));
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
@@ -30,16 +29,16 @@ const app = express();
 // Set security HTTP headers
 app.use(helmet());
 // Development logging
-if (process.env.NODE_ENV === "development") {
-  app.use(logger("dev"));
+if (process.env.NODE_ENV === 'development') {
+  app.use(logger('dev'));
 }
 // Limit requests from same API
 const limiter = rateLimit({
-    max: 5,
-    windowMs: 05 * 60 * 1000,
-    message: "Too many requests from this IP, please try again in an hour!",
-  });
-app.use("/api", limiter);
+  max: 5,
+  windowMs: 05 * 60 * 1000,
+  message: 'Too many requests from this IP, please try again in an hour!',
+});
+app.use('/api', limiter);
 // Body parser, reading data from body into req.body
 app.use(express.json());
 // app.use(express.json({ limit: "10kb" }));
