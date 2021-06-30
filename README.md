@@ -1,6 +1,4 @@
-# travelntours
-
-API Travel n Tours
+# Travel & Tours
 
 <p align='left'>API Travel Tours dengan menggunakan NodeJS (ExpressJS) dan MongoDB sebagai database NoSQL </p>
 
