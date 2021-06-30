@@ -13,10 +13,25 @@ module.exports = {
       res.status(200).json({
         status: 'success',
         results: tours.length,
-        data: tours,
+        data: { tours },
       });
     } catch (err) {
-      return res.status(err.status).json({
+      res.status(err.status).json({
+        status: err.status,
+        message: err.message,
+      });
+    }
+  },
+  getData: async (req, res, next) => {
+    try {
+      const tours = await Tour.findById(req.params.id);
+      res.status(200).json({
+        status: 'success',
+        results: tours.length,
+        data: { tours },
+      });
+    } catch (err) {
+      res.status(err.status).json({
         status: err.status,
         message: err.message,
       });
@@ -48,7 +63,7 @@ module.exports = {
         data: newTour,
       });
     } catch (err) {
-      return res.status(err.status).json({
+      res.status(err.status).json({
         status: err.status,
         message: err.message,
       });
