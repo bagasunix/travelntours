@@ -13,7 +13,7 @@ module.exports = {
       res.status(200).json({
         status: 'success',
         results: tours.length,
-        data: { tours },
+        tours: tours,
       });
     } catch (err) {
       res.status(500).json({
