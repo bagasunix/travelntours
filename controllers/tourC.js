@@ -1,14 +1,27 @@
 // Lib Validator
 const Validator = require('fastest-validator');
+const Features = require('../utils/APIFeatures');
 
 const v = new Validator();
 // /Model
 const Tour = require('../models/tourM');
 
 module.exports = {
+  aliasTopTours: (req, res, next) => {
+    req.query.limit = '5';
+    req.query.sort = '-ratingsAverage,price';
+    req.query.fields = 'name,price,ratingsAverage,summary,difficulty';
+    next();
+  },
   getAllData: async (req, res, next) => {
     try {
-      const tours = await Tour.find();
+      const feature = new Features(Tour.find(), req.query)
+        .filter()
+        .sort()
+        .limitFields()
+        .paginate();
+
+      const tours = await feature.query;
       // Ress
       res.status(200).json({
         status: 'success',
